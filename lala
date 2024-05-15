@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comments</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background-color: #f2f2f2;
+        }
+        a:hover {
+            background-color: #4CAF50;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    
+    <?php
+    require_once 'config.php';
+    include "nav.php";
+
+    $sql = "SELECT * FROM comments";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        echo "<table>";
+        echo "<tr><th>Name</th><th>Comment</th><th>Country</th><th>Phone Number</th><th>Action</th></tr>";
+        while($row = $result->fetch_assoc()) {
+            echo "<tr>";
+            echo "<td>". $row["name"]. "</td>";
+            echo "<td>". $row["comment"]. "</td>";
+            echo "<td>". $row["country"]. "</td>";
+            echo "<td>". $row["phone_number"]. "</td>";
+            echo "<td><a role = 'button'class='btn btn-danger btn-lg' href='delete_comment.php?id=". $row["id"]. "'>Delete</a></td>";
+            echo "</tr>";
+        }
+        echo "</table>";
+    } else {
+        echo "gaada komen yang disubmit";
+    }
+
+    $conn->close();
+   ?>
+
+   
+
+</div>
+</body>
+</html>
